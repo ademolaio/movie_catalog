@@ -1,3 +1,0 @@
-2023-12-16 22:57:00.531 | INFO     | util.unzip_task:process_zip_files:34 - Starting the extraction process...
-2023-12-16 22:57:00.587 | INFO     | util.unzip_task:extract_zip_files:24 - Extracting /Users/deucalion/Developer/Python/movie_catalog/zip/all_movies.csv-2.bz2 to /Users/deucalion/Developer/Python/movie_catalog/csv/all_movies.csv-2.csv
-2023-12-16 22:57:00.587 | INFO     | util.unzip_task:process_zip_files:36 - Extraction process completed
