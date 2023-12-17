@@ -1,13 +1,8 @@
 import os
-from datetime import datetime
 from loguru import logger
-from config.logging_config import script_filter
+
 
 # Configure Loguru Logger
-verify_logger = logger.bind(naam="verification_util")
-log_file_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'logs',
-                             f'verification_util.py_{datetime.now().strftime("%Y%m%d-%H%M%S")}.log')
-verify_logger.add(log_file_path,  filter=script_filter('unzip_script'), rotation="10 MB")
 
 
 def verify_zip_extraction(zip_folder, csv_folder):
@@ -27,9 +22,9 @@ def verify_zip_extraction(zip_folder, csv_folder):
             csv_file_path = os.path.join(csv_folder, corresponding_csv)
 
             if os.path.isfile(csv_file_path):
-                verify_logger.info(f"Verified: '{file_name}' has corresponding .csv file '{corresponding_csv}")
+                logger.info(f"Verified: '{file_name}' has corresponding .csv file '{corresponding_csv}")
             else:
-                verify_logger.warning(f"Missing: No corresponding CSV file '{file_name}'")
+                logger.warning(f"Missing: No corresponding CSV file '{file_name}'")
                 all_files_verified = False
 
     return all_files_verified

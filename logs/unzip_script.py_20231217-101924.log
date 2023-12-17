@@ -1,4 +1,0 @@
-2023-12-17 10:19:24.892 | INFO     | scripts.unzip_script:process_zip_files:36 - Starting the extraction process...
-2023-12-17 10:19:24.949 | INFO     | scripts.unzip_script:extract_zip_files:26 - Extracting /Users/deucalion/Developer/Python/movie_catalog/zip/all_movies.csv-2.bz2 to /Users/deucalion/Developer/Python/movie_catalog/csv/all_movies.csv-2.csv
-2023-12-17 10:19:24.949 | INFO     | scripts.unzip_script:process_zip_files:38 - Extraction process completed
-2023-12-17 10:19:24.949 | INFO     | scripts.unzip_script:process_zip_files:42 - All files are verified successfully for /Users/deucalion/Developer/Python/movie_catalog/csv
