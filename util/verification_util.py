@@ -1,12 +1,13 @@
 import os
 from datetime import datetime
 from loguru import logger
+from config.logging_config import script_filter
 
 # Configure Loguru Logger
-verify_logger = logger.bind(naam="verification_task")
+verify_logger = logger.bind(naam="verification_util")
 log_file_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'logs',
-                             f'verification_task.py_{datetime.now().strftime("%Y%m%d-%H%M%S")}.log')
-verify_logger.add(log_file_path, rotation="10 MB")
+                             f'verification_util.py_{datetime.now().strftime("%Y%m%d-%H%M%S")}.log')
+verify_logger.add(log_file_path,  filter=script_filter('unzip_script'), rotation="10 MB")
 
 
 def verify_zip_extraction(zip_folder, csv_folder):
@@ -22,23 +23,14 @@ def verify_zip_extraction(zip_folder, csv_folder):
 
     for file_name in os.listdir(zip_folder):
         if file_name.endswith('.bz2'):
-            csv_file_path = file_name.replace('.bz2', '.csv')
-            csv_file_path = os.path.join(csv_folder, csv_file_path)
+            corresponding_csv = file_name.replace('.bz2', '.csv')
+            csv_file_path = os.path.join(csv_folder, corresponding_csv)
 
-            if not os.path.isfile(csv_file_path):
-                verify_logger.warning(f"Missing CSV file(s) for: {csv_file_path}")
+            if os.path.isfile(csv_file_path):
+                verify_logger.info(f"Verified: '{file_name}' has corresponding .csv file '{corresponding_csv}")
+            else:
+                verify_logger.warning(f"Missing: No corresponding CSV file '{file_name}'")
                 all_files_verified = False
 
     return all_files_verified
 
-
-def execute_zip_to_csv_verification():
-    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    zip_folder_path = os.path.join(project_root, 'zip')
-    csv_folder_path = os.path.join(project_root, 'csv')
-
-    logger.info("Starting the Zip to CSV verification process")
-    if verify_zip_extraction(zip_folder_path, csv_folder_path):
-        verify_logger.info(f"All files are verified successfully for {csv_folder_path}")
-    else:
-        verify_logger.error("Some files are missing their corresponding .csv files please check the zip folder")

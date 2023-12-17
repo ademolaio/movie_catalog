@@ -1,10 +1,10 @@
 import os
 import pytest
-from util.unzip_task import extract_zip_files
+from scripts.unzip_script import extract_zip_files
 
 
 @pytest.fixture
-def setup_test_env(tmp_path):
+def setup_unzip_test_env(tmp_path):
     # Create a temporary directory structure
     zip_dir = tmp_path / "zip"
     csv_dir = tmp_path / "csv"
@@ -18,8 +18,8 @@ def setup_test_env(tmp_path):
     return str(zip_dir), str(csv_dir)
 
 
-def test_extract_zip_files(setup_test_env):
-    zip_dir, csv_dir = setup_test_env
+def test_extract_zip_files(setup_unzip_test_env):
+    zip_dir, csv_dir = setup_unzip_test_env
     extract_zip_files(zip_dir, csv_dir)
 
     # Check if the extract files exists

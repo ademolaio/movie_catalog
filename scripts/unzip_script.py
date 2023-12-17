@@ -2,13 +2,15 @@ import bz2
 import shutil
 import os
 from datetime import datetime
+from util.verification_util import verify_zip_extraction
 from loguru import logger
-
+from config.logging_config import script_filter
 
 # Configure Loguru Logger
-unzip_logger = logger.bind(name="unzip_task")
-log_file_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'logs', f'unzip_task.py_{datetime.now().strftime("%Y%m%d-%H%M%S")}.log')
-unzip_logger.add(log_file_path, rotation="10 MB")
+unzip_logger = logger.bind(script="unzip_script")
+log_file_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'logs',
+                             f'unzip_script.py_{datetime.now().strftime("%Y%m%d-%H%M%S")}.log')
+unzip_logger.add(log_file_path, filter=script_filter('unzip_script'), rotation="10 MB", enqueue=True)
 
 
 def extract_zip_files(source_folder, target_folder):
@@ -34,3 +36,9 @@ def process_zip_files():
     unzip_logger.info("Starting the extraction process...")
     extract_zip_files(zip_folder_path, csv_folder_path)
     unzip_logger.info("Extraction process completed")
+
+    logger.info("Starting the Zip to CSV verification process")
+    if verify_zip_extraction(zip_folder_path, csv_folder_path):
+        unzip_logger.info(f"All files are verified successfully for {csv_folder_path}")
+    else:
+        unzip_logger.error("Some files are missing their corresponding .csv files please check the zip folder")
