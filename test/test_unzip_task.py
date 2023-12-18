@@ -1,6 +1,6 @@
 import os
 import pytest
-from scripts.unzip_script import extract_zip_files
+from scripts.csv_unzip_script import extract_zip_files
 
 
 @pytest.fixture

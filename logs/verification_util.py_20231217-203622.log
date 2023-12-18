@@ -1,0 +1,1 @@
+2023-12-17 20:36:22.695 | INFO     | util.verification_util:verify_zip_extraction:31 - Verified: 'all_movies.csv-2.bz2' has corresponding .csv file 'all_movies.csv-2.csv

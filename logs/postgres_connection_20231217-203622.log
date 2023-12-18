@@ -1,0 +1,6 @@
+2023-12-17 20:36:22.638 | INFO     | config.postgres_connection_config:<module>:31 - Connection pool created successfully
+2023-12-17 20:36:22.695 | INFO     | config.postgres_connection_config:demonstrate_connection_capabilities:90 - Successfully obtained a database connection to PostgresSQL
+2023-12-17 20:36:22.695 | INFO     | config.postgres_connection_config:put_db_connection:63 - Returned connection pool has been made to PostgresSQL: <connection object at 0x101c1a650; dsn: 'user=dev_user password=xxx dbname=dev_db host=localhost port=5432', closed: 0>
+2023-12-17 20:36:22.695 | INFO     | config.postgres_connection_config:demonstrate_connection_capabilities:94 - Successfully returned connection pool to the PostgresSQL database
+2023-12-17 20:36:22.696 | INFO     | config.postgres_connection_config:close_db_connection:77 - Connection has been closed
+2023-12-17 20:36:22.696 | INFO     | config.postgres_connection_config:demonstrate_connection_capabilities:97 - Successfully closed a database connection to PostgresSQL
